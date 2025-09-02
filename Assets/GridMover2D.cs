@@ -30,6 +30,8 @@ public class GridMover2D : MonoBehaviour
 
     private BoxCollider2D hitbox;
 
+    public void SetGrid(Grid newGrid) => grid = newGrid;
+
     void Awake()
     {
         hitbox = GetComponent<BoxCollider2D>();
