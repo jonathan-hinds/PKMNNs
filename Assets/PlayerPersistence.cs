@@ -52,6 +52,12 @@ public sealed class PlayerPersistence : MonoBehaviour
 
         mover.SetGrid(grid);
 
+        foreach (var mb in Object.FindObjectsOfType<MonoBehaviour>(true))
+        {
+            if (mb is IGridBound bound)
+                bound.Rebind(grid);
+        }
+
         if (hasPendingSpawn)
         {
             Vector3 world = grid.GetCellCenterWorld(pendingSpawnCell);

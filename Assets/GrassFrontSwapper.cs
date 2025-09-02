@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-public class GrassFrontSwapper : MonoBehaviour
+public class GrassFrontSwapper : MonoBehaviour, IGridBound
 {
     [Header("Scene refs (required)")]
-    [SerializeField] private Grid playerGrid;        // The Grid your map/mover use (parent of tilemaps)
     [SerializeField] private Tilemap grassBehind;    // ORDER 1: all bushes painted here at start
     [SerializeField] private Tilemap grassFront;     // ORDER 3: starts EMPTY
+    private Grid playerGrid;                         // The Grid your map/mover use (parent of tilemaps)
 
     [Header("Player (required)")]
     [SerializeField] private GridMover2D playerMover; // We rely on OnStepFinished to avoid flicker
@@ -24,12 +25,11 @@ public class GrassFrontSwapper : MonoBehaviour
 
     private void Awake()
     {
-        if (!playerGrid) playerGrid = GetComponentInParent<Grid>();
         if (!player && playerMover) player = playerMover.transform;
 
-        if (player == null || playerMover == null || playerGrid == null || grassBehind == null || grassFront == null)
+        if (player == null || playerMover == null)
         {
-            Debug.LogError("GrassFrontSwapper: wire playerGrid, grassBehind, grassFront, playerMover, and player.");
+            Debug.LogError("GrassFrontSwapper: wire playerMover and player.");
             enabled = false;
             return;
         }
@@ -47,16 +47,48 @@ public class GrassFrontSwapper : MonoBehaviour
         if (playerMover != null) playerMover.OnStepFinished -= HandleStepFinished;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        // Evaluate once on scene start
-        HandleStepFinished(GetFeetCellInMoverGrid());
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        RebindSceneRefs();
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RebindSceneRefs();
+    }
+
+    public void Rebind(Grid newGrid)
+    {
+        playerGrid = newGrid;
+        RebindSceneRefs();
+    }
+
+    private void RebindSceneRefs()
+    {
+        if (playerMover)
+            playerGrid = playerMover.CurrentGrid;
+
+        if (!grassBehind || !grassBehind.gameObject.scene.IsValid())
+            grassBehind = GameObject.Find("GrassBehind")?.GetComponent<Tilemap>();
+
+        if (!grassFront || !grassFront.gameObject.scene.IsValid())
+            grassFront = GameObject.Find("GrassFront")?.GetComponent<Tilemap>();
+
+        if (playerGrid && grassBehind && grassFront)
+            HandleStepFinished(GetFeetCellInMoverGrid());
     }
 
     // ---- Core logic ----
 
     private void HandleStepFinished(Vector3Int _)
     {
+        if (playerGrid == null || grassBehind == null || grassFront == null) return;
         // We ignore the mover's cell and re-sample using FEET so “which bush” matches visuals 1:1
         Vector3Int feetCell = GetFeetCellInMoverGrid();
         EvaluateAndSwap(feetCell);
@@ -66,6 +98,8 @@ public class GrassFrontSwapper : MonoBehaviour
     private Vector3Int GetFeetCellInMoverGrid()
     {
         Vector3 sampleWorld;
+
+        if (playerGrid == null) return Vector3Int.zero;
 
         if (feet)
         {
@@ -85,6 +119,8 @@ public class GrassFrontSwapper : MonoBehaviour
 
     private void EvaluateAndSwap(Vector3Int moverFeetCell)
     {
+        if (playerGrid == null || grassBehind == null || grassFront == null) return;
+
         // 1) Convert mover feet cell -> world center (authoritative world point for that tile)
         Vector3 worldCenter = playerGrid.GetCellCenterWorld(moverFeetCell);
 
