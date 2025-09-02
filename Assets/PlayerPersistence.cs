@@ -62,6 +62,7 @@ public sealed class PlayerPersistence : MonoBehaviour
         {
             Vector3 world = grid.GetCellCenterWorld(pendingSpawnCell);
             transform.position = new Vector3(world.x, world.y, transform.position.z);
+            FindObjectOfType<CameraFollow2D>()?.RebindTarget();
             hasPendingSpawn = false;
         }
     }

@@ -1,10 +1,33 @@
 // Scripts/Rendering/CameraFollow2D.cs
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow2D : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float smooth = 20f;
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        RebindTarget();
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RebindTarget();
+    }
+
+    public void RebindTarget()
+    {
+        target = FindObjectOfType<PlayerController>()?.transform;
+    }
+
     void LateUpdate()
     {
         if (!target) return;
