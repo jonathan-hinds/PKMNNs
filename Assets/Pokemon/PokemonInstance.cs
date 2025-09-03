@@ -3,19 +3,21 @@ using System.Linq;
 
 public class PokemonInstance
 {
-    public PokemonDefinition definition;
-    public int level;
+    private PokemonDefinition definition;
+    private int level;
 
     private List<string> moveSet;
     private List<string> learnableMoves;
 
     private static System.Random rng = new System.Random();
 
-    public PokemonStats Stats => PokemonStatCalculator.Calculate(definition.baseStats, level);
+    public PokemonDefinition Definition => definition;
+    public int Level => level;
+    public PokemonStats Stats => PokemonStatCalculator.Calculate(definition.BaseStats, level);
     public IReadOnlyList<string> Moves => moveSet;
     public IReadOnlyList<string> LearnableMoves => learnableMoves;
-    public IReadOnlyList<string> Abilities => definition.abilities;
-    public IReadOnlyList<PokemonType> Types => definition.types;
+    public IReadOnlyList<string> Abilities => definition.Abilities;
+    public IReadOnlyList<PokemonType> Types => definition.Types;
 
     public PokemonInstance(PokemonDefinition definition, int level)
     {
@@ -29,9 +31,9 @@ public class PokemonInstance
     private List<string> GetMovesForLevel(int targetLevel)
     {
         var learned = new HashSet<string>();
-        if (definition.learnset == null)
+        if (definition.Learnset == null)
             return learned.ToList();
-        foreach (var entry in definition.learnset)
+        foreach (var entry in definition.Learnset)
         {
             if (entry.level <= targetLevel)
             {
