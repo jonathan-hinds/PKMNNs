@@ -1,8 +1,11 @@
 using UnityEngine;
 
-[System.Serializable]
-public class EffectHook
+namespace PKMN
 {
-    public string trigger;
-    public EffectData effect;
+    [System.Serializable]
+    public class EffectHook
+    {
+        public BattleEvent trigger;
+        public BattleEffect effect;
+    }
 }

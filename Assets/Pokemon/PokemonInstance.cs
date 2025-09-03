@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+namespace PKMN
+{
 public class PokemonInstance
 {
-    private static readonly System.Random rng = new System.Random();
-
     private readonly PokemonDefinition definition;
     private readonly int level;
 
@@ -28,15 +28,15 @@ public class PokemonInstance
         this.level = Mathf.Clamp(level, 1, 100);
 
         learnableMoves = GetMovesForLevel(this.level);
-        moveSet = GenerateRandomMoveLoadout(learnableMoves);
+        moveSet = GenerateMoveLoadout(learnableMoves);
     }
 
     private List<string> GetMovesForLevel(int targetLevel)
     {
-        var learned = new HashSet<string>();
+        var learned = new List<string>();
         var ls = definition.Learnset;
         if (ls == null || ls.Count == 0)
-            return new List<string>();
+            return learned;
 
         foreach (var entry in ls)
         {
@@ -45,32 +45,23 @@ public class PokemonInstance
             {
                 foreach (var move in entry.moves)
                 {
-                    if (!string.IsNullOrWhiteSpace(move))
-                        learned.Add(move);
+                    if (string.IsNullOrWhiteSpace(move) || learned.Contains(move))
+                        continue;
+                    learned.Add(move);
                 }
             }
         }
-        return learned.ToList();
+        return learned;
     }
 
-    private List<string> GenerateRandomMoveLoadout(List<string> available)
+    private List<string> GenerateMoveLoadout(List<string> available)
     {
         if (available == null || available.Count == 0)
             return new List<string>();
 
-        var result = new List<string>(available);
-
-        // Fisher–Yates shuffle
-        int n = result.Count;
-        while (n > 1)
-        {
-            int k = rng.Next(n--);
-            (result[n], result[k]) = (result[k], result[n]);
-        }
-
-        if (result.Count > 4)
-            result.RemoveRange(4, result.Count - 4);
-
-        return result;
+        // Take the last four moves learned to mirror main-series behavior
+        int count = Mathf.Min(4, available.Count);
+        return available.Skip(available.Count - count).Take(count).ToList();
     }
+}
 }

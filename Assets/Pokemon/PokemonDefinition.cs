@@ -3,6 +3,8 @@ using UnityEngine;
 // If your old assets used public fields like id/displayName/baseStats, uncomment:
 // using UnityEngine.Serialization;
 
+namespace PKMN
+{
 #region Data Rows
 
 [System.Serializable]
@@ -27,27 +29,17 @@ public class Evolution
 [System.Serializable]
 public class PokemonDefinition
 {
-    // If migrating from public fields, add FormerlySerializedAs to preserve data:
-    // [FormerlySerializedAs("id")]
-    [SerializeField] private string id;
-
-    // [FormerlySerializedAs("displayName")]
-    [SerializeField] private string displayName;
-
-    [SerializeField, TextArea] private string description;
-
-    [SerializeField] private PokemonType[] types;
-
-    // [FormerlySerializedAs("baseStats")]
-    [SerializeField] private PokemonBaseStats baseStats;
-
-    [SerializeField] private GrowthRate growthRate;
-    [SerializeField] private int catchRate;
-    [SerializeField] private int expYield;
-
-    [SerializeField] private List<string> abilities = new();
-    [SerializeField] private List<LearnsetEntry> learnset = new();
-    [SerializeField] private List<Evolution> evolutions = new();
+    public string id;
+    public string displayName;
+    [TextArea] public string description;
+    public PokemonType[] types;
+    public PokemonBaseStats baseStats;
+    public GrowthRate growthRate;
+    public int catchRate;
+    public int expYield;
+    public List<string> abilities = new();
+    public List<LearnsetEntry> learnset = new();
+    public List<Evolution> evolutions = new();
 
     public string Id => id;
     public string DisplayName => displayName;
@@ -69,7 +61,7 @@ public class PokemonDefinition
 [CreateAssetMenu(fileName = "PokemonDatabase", menuName = "PKMN/Pokemon Database")]
 public class PokemonDatabase : ScriptableObject
 {
-    [SerializeField] private List<PokemonDefinition> pokemon = new();
+    public List<PokemonDefinition> pokemon = new();
 
     public PokemonDefinition GetById(string id)
     {
@@ -80,3 +72,4 @@ public class PokemonDatabase : ScriptableObject
 }
 
 #endregion
+}
