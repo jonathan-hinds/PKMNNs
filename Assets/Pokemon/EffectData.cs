@@ -3,7 +3,10 @@ using UnityEngine;
 [System.Serializable]
 public class EffectData
 {
-    public string effect;
+    // ID of the effect entry in the EffectCatalog
+    public string effectId;
+
+    // Optional JSON overrides for the catalog entry's arguments
     [TextArea]
-    public string argsJson;
+    public string overrideArgsJson;
 }
