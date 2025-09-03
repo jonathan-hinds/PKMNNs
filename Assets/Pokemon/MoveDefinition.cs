@@ -11,8 +11,7 @@ public class MoveDefinition
     public int power;
     public int accuracy;
     public int pp;
-    // IDs of effects to apply from the EffectCatalog along with optional argument overrides
-    public List<EffectData> effects;
+    public List<BattleEffect> effects;
 }
 
 [CreateAssetMenu(fileName = "MoveDatabase", menuName = "PKMN/Move Database")]
