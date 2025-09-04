@@ -27,7 +27,7 @@ static class DatabaseLoader
 public class MoveCreatorWizard : ScriptableWizard
 {
     public string id;
-    public string name;
+    public new string name;
     public PokemonType type;
     public MoveCategory category;
     public int power;
@@ -64,7 +64,7 @@ public class MoveCreatorWizard : ScriptableWizard
 public class AbilityCreatorWizard : ScriptableWizard
 {
     public string id;
-    public string name;
+    public new string name;
     [TextArea]
     public string summary;
     public EffectHook[] hooks;
