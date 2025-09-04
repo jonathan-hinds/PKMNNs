@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using PKMN;
 
 [System.Serializable]
 public class MoveDefinition

@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using PKMN;
 
 /// <summary>
 /// Utility helpers for loading or creating database assets.
