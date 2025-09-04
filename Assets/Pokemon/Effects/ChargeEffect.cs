@@ -1,10 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="PKMN/Effects/Charge")]
-public class ChargeEffect : BattleEffect
+namespace PKMN
 {
-    public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+    [CreateAssetMenu(menuName="PKMN/Effects/Charge")]
+    public class ChargeEffect : BattleEffect
     {
-        user?.StartCharge(move);
+        public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+        {
+            user?.StartCharge(move);
+        }
     }
 }
