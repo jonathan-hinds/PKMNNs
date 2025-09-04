@@ -1,4 +1,5 @@
 using UnityEngine;
+using PKMN;
 
 [System.Serializable]
 public class EffectHook

@@ -1,11 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="PKMN/Effects/Damage")]
-public class DamageEffect : BattleEffect
+namespace PKMN
 {
-    public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+    [CreateAssetMenu(menuName="PKMN/Effects/Damage")]
+    public class DamageEffect : BattleEffect
     {
-        if (target != null)
-            target.ModifyHP(-move.power);
+        public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+        {
+            if (target != null)
+                target.ModifyHP(-move.power);
+        }
     }
 }
