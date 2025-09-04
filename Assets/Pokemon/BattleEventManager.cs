@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PKMN;
 
 public class BattleEventManager
 {
