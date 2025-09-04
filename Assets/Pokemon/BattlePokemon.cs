@@ -23,15 +23,17 @@ public class BattlePokemon
     private string rampagePostStatus;
 
     private readonly StatusDatabase statusDb;
+    private readonly AbilityDatabase abilityDb;
     private float speedMultiplier = 1f;
 
     public int MaxHP { get; }
     public int CurrentHP { get; private set; }
 
-    public BattlePokemon(PokemonInstance instance, StatusDatabase statusDb = null)
+    public BattlePokemon(PokemonInstance instance, StatusDatabase statusDb = null, AbilityDatabase abilityDb = null)
     {
         this.instance = instance;
         this.statusDb = statusDb;
+        this.abilityDb = abilityDb;
         currentAbility = instance.Abilities.Count > 0 ? instance.Abilities[0] : null;
         originalAbility = currentAbility;
         MaxHP = instance.Stats.hp;
@@ -61,6 +63,12 @@ public class BattlePokemon
 
     public void ApplyStatus(string id, int duration, BattlePokemon source = null)
     {
+        var context = new BattleContext { statusId = id };
+        source?.RunAbilityHooks(BattleEvent.BeforeStatus, this, null, context);
+        RunAbilityHooks(BattleEvent.BeforeStatus, source, null, context);
+        if (context.preventStatus)
+            return;
+
         int dur = duration;
         if (dur <= 0 && statusDb != null)
         {
@@ -101,8 +109,24 @@ public class BattlePokemon
         }
     }
 
+    internal void RunAbilityHooks(BattleEvent evt, BattlePokemon opponent, MoveDefinition move, BattleContext context)
+    {
+        if (abilityDb == null || string.IsNullOrEmpty(currentAbility))
+            return;
+        var def = abilityDb.GetById(currentAbility);
+        if (def == null || def.hooks == null)
+            return;
+        foreach (var hook in def.hooks)
+        {
+            if (hook.trigger != evt)
+                continue;
+            hook.effect?.Apply(this, opponent, move, context);
+        }
+    }
+
     public bool BeforeMove(BattlePokemon opponent, MoveDefinition move, BattleContext context)
     {
+        RunAbilityHooks(BattleEvent.BeforeMove, opponent, move, context);
         RunStatusHooks(BattleEvent.BeforeMove, opponent, move, context);
         return context == null || !context.preventMove;
     }
@@ -152,6 +176,7 @@ public class BattlePokemon
 
     public void AdvanceTurn(BattlePokemon opponent)
     {
+        RunAbilityHooks(BattleEvent.TurnEnd, opponent, null, new BattleContext());
         RunStatusHooks(BattleEvent.TurnEnd, opponent, null, new BattleContext());
 
         if (rampageMoveId != null)
