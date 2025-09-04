@@ -8,16 +8,5 @@ public class AbilityDefinition
     public string name;
     [TextArea]
     public string summary;
-    public List<EffectHook> hooks;
-}
-
-[CreateAssetMenu(fileName = "AbilityDatabase", menuName = "PKMN/Ability Database")]
-public class AbilityDatabase : ScriptableObject
-{
-    public List<AbilityDefinition> abilities;
-
-    public AbilityDefinition GetById(string id)
-    {
-        return abilities.Find(a => a.id == id);
-    }
+    public List<EffectHook> hooks = new();
 }

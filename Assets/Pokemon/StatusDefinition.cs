@@ -7,7 +7,7 @@ public class StatusDefinition
     public string id;
     public int minDuration;
     public int maxDuration;
-    public List<EffectHook> hooks;
+    public List<EffectHook> hooks = new();
 }
 
 // Database class moved to StatusDatabase.cs

@@ -1,12 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="PKMN/Effects/Set Speed Multiplier")]
-public class SetSpeedMultiplierEffect : BattleEffect
+namespace PKMN
 {
-    public float multiplier = 2f;
-
-    public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+    [CreateAssetMenu(menuName="PKMN/Effects/Set Speed Multiplier")]
+    public class SetSpeedMultiplierEffect : BattleEffect
     {
-        user?.SetSpeedMultiplier(multiplier);
+        public float multiplier = 2f;
+
+        public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+        {
+            user?.SetSpeedMultiplier(multiplier);
+        }
     }
 }
