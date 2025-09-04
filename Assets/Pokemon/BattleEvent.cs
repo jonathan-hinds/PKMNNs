@@ -7,5 +7,6 @@ public enum BattleEvent
     AfterMove,
     CalculateDamage,
     WeatherChanged,
-    TurnEnd
+    TurnEnd,
+    BeforeStatus
 }
