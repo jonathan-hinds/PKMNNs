@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9824bc6ac014e0d91895146d22ee26e, type: 3}
+  m_Name: MoveDatabase
+  m_EditorClassIdentifier: 
+  moves:
+  - id: growl
+    name: Growl
+    type: 0
+    category: 2
+    power: 0
+    accuracy: 100
+    pp: 40
+    effects:
+    - {fileID: 11400000, guid: f5041dc3e9b6083498aa6a8d2a60ae76, type: 2}
+  - id: tackle
+    name: Tackle
+    type: 0
+    category: 0
+    power: 40
+    accuracy: 100
+    pp: 35
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+  - id: vine_whip
+    name: Vine Whip
+    type: 3
+    category: 0
+    power: 45
+    accuracy: 100
+    pp: 25
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+  - id: growth
+    name: Growth
+    type: 0
+    category: 2
+    power: 0
+    accuracy: 100
+    pp: 20
+    effects:
+    - {fileID: 11400000, guid: e022dddddfcc62b42a0f80e5d676005a, type: 2}
+    - {fileID: 11400000, guid: 7be28596d68d1424d9622d190e21488d, type: 2}
+  - id: leech_seed
+    name: Leech Seed
+    type: 3
+    category: 2
+    power: 0
+    accuracy: 90
+    pp: 10
+    effects:
+    - {fileID: 11400000, guid: b595bf45e0022b74da191dc13c7a999a, type: 2}
+  - id: razor_leaf
+    name: Razor Leaf
+    type: 3
+    category: 0
+    power: 55
+    accuracy: 95
+    pp: 25
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+  - id: sleep_powder
+    name: Sleep Powder
+    type: 3
+    category: 2
+    power: 0
+    accuracy: 75
+    pp: 15
+    effects:
+    - {fileID: 11400000, guid: 06452861787481c48bfc8187ae4cb4e7, type: 2}
+  - id: seed_bomb
+    name: Seed Bomb
+    type: 3
+    category: 0
+    power: 80
+    accuracy: 100
+    pp: 15
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+  - id: take_down
+    name: Take Down
+    type: 0
+    category: 0
+    power: 90
+    accuracy: 85
+    pp: 20
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+    - {fileID: 11400000, guid: 34e1287e33a8f3c4b82ac91b3fc5365c, type: 2}
+  - id: take_down
+    name: Take Down
+    type: 0
+    category: 0
+    power: 90
+    accuracy: 85
+    pp: 20
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+    - {fileID: 11400000, guid: 34e1287e33a8f3c4b82ac91b3fc5365c, type: 2}
+  - id: sweet_scent
+    name: Sweet Scent
+    type: 0
+    category: 2
+    power: 0
+    accuracy: 100
+    pp: 20
+    effects:
+    - {fileID: 11400000, guid: aa7fa7c6fd9e78a4798ac19a2886f0cb, type: 2}
+  - id: synthesis
+    name: Synthesis
+    type: 3
+    category: 2
+    power: 0
+    accuracy: 100
+    pp: 5
+    effects:
+    - {fileID: 11400000, guid: 029083ae29e71cd43957253adbb30175, type: 2}
+  - id: worry_seed
+    name: Worry Seed
+    type: 3
+    category: 2
+    power: 0
+    accuracy: 100
+    pp: 10
+    effects:
+    - {fileID: 11400000, guid: bff7b417a2ae5954f934bcf9118c3da5, type: 2}
+  - id: double_edge
+    name: Double-Edge
+    type: 0
+    category: 0
+    power: 120
+    accuracy: 100
+    pp: 15
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+    - {fileID: 11400000, guid: 88e88c269e8da384b8a0933313435054, type: 2}
+  - id: solar_beam
+    name: Solar Beam
+    type: 3
+    category: 1
+    power: 120
+    accuracy: 100
+    pp: 10
+    effects:
+    - {fileID: 11400000, guid: fac547bde06867948bd4ab543f71df0f, type: 2}
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+  - id: petal_dance
+    name: Petal Dance
+    type: 3
+    category: 1
+    power: 120
+    accuracy: 100
+    pp: 10
+    effects:
+    - {fileID: 11400000, guid: 90125c906b44a9549b78bc0bd0c480cf, type: 2}
+    - {fileID: 11400000, guid: 62e9093e09d89504a8ef526e5bbdc25a, type: 2}

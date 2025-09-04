@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AbilityDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityDatabase
+  abilities:
+  - id: overgrow
+    name: Overgrow
+    summary: "Boosts Grass\u2011type moves when HP is low."
+    hooks:
+    - trigger: 3
+      effect: {fileID: 11400000, guid: af1f45a7f7665564ca7ed564516fa6ae, type: 2}
+  - id: chlorophyll
+    name: Chlorophyll
+    summary: Doubles speed in sunshine.
+    hooks:
+    - trigger: 4
+      effect: {fileID: 11400000, guid: c77945031f5b1f140bbd3194dfa152b1, type: 2}
+  - id: insomnia
+    name: Insomnia
+    summary: "Prevents the Pok\xE9mon from sleeping."
+    hooks:
+    - trigger: 6
+      effect: {fileID: 11400000, guid: d1602b5a9a4c5b94c91686b0de38c6e9, type: 2}
