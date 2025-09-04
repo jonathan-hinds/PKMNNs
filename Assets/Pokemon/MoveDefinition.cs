@@ -14,14 +14,4 @@ public class MoveDefinition
     public int pp;
     public List<BattleEffect> effects = new();
 }
-
-[CreateAssetMenu(fileName = "MoveDatabase", menuName = "PKMN/Move Database")]
-public class MoveDatabase : ScriptableObject
-{
-    public List<MoveDefinition> moves = new();
-
-    public MoveDefinition GetById(string id)
-    {
-        return moves.Find(m => m.id == id);
-    }
-}
+// Database class moved to MoveDatabase.cs
