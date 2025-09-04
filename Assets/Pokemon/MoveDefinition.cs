@@ -12,13 +12,13 @@ public class MoveDefinition
     public int power;
     public int accuracy;
     public int pp;
-    public List<BattleEffect> effects;
+    public List<BattleEffect> effects = new();
 }
 
 [CreateAssetMenu(fileName = "MoveDatabase", menuName = "PKMN/Move Database")]
 public class MoveDatabase : ScriptableObject
 {
-    public List<MoveDefinition> moves;
+    public List<MoveDefinition> moves = new();
 
     public MoveDefinition GetById(string id)
     {
