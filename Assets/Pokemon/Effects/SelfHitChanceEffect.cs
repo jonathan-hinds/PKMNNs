@@ -1,19 +1,22 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="PKMN/Effects/Self Hit Chance")]
-public class SelfHitChanceEffect : BattleEffect
+namespace PKMN
 {
-    [Range(0f,1f)] public float chance = 0.33f;
-    public int power = 40;
-
-    public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+    [CreateAssetMenu(menuName="PKMN/Effects/Self Hit Chance")]
+    public class SelfHitChanceEffect : BattleEffect
     {
-        if (user == null || context == null)
-            return;
-        if (UnityEngine.Random.value < chance)
+        [Range(0f,1f)] public float chance = 0.33f;
+        public int power = 40;
+
+        public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
         {
-            user.ModifyHP(-power);
-            context.preventMove = true;
+            if (user == null || context == null)
+                return;
+            if (UnityEngine.Random.value < chance)
+            {
+                user.ModifyHP(-power);
+                context.preventMove = true;
+            }
         }
     }
 }
