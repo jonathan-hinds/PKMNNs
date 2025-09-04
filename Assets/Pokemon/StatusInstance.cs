@@ -1,9 +1,12 @@
 using System;
 
-[Serializable]
-public class StatusInstance
+namespace PKMN
 {
-    public string id;
-    public int remainingTurns;
-    public object data;
+    [Serializable]
+    public class StatusInstance
+    {
+        public string id;
+        public int remainingTurns;
+        public object data;
+    }
 }

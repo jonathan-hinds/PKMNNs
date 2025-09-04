@@ -1,11 +1,15 @@
 using System;
 
-public enum BattleEvent
+namespace PKMN
 {
-    TurnStart,
-    BeforeMove,
-    AfterMove,
-    CalculateDamage,
-    WeatherChanged,
-    TurnEnd
+    public enum BattleEvent
+    {
+        TurnStart,
+        BeforeMove,
+        AfterMove,
+        CalculateDamage,
+        WeatherChanged,
+        TurnEnd,
+        BeforeStatus
+    }
 }

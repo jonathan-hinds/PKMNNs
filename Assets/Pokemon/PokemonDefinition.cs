@@ -3,70 +3,73 @@ using UnityEngine;
 // If your old assets used public fields like id/displayName/baseStats, uncomment:
 // using UnityEngine.Serialization;
 
-#region Data Rows
-
-[System.Serializable]
-public class LearnsetEntry
+namespace PKMN
 {
-    public int level;
-    public List<string> moves;
-}
+    #region Data Rows
 
-[System.Serializable]
-public class Evolution
-{
-    public string trigger;
-    public int minLevel;
-    public string to;
-}
-
-#endregion
-
-#region Definitions
-
-[System.Serializable]
-public class PokemonDefinition
-{
-    public string id;
-    public string displayName;
-    [TextArea] public string description;
-    public PokemonType[] types;
-    public PokemonBaseStats baseStats;
-    public GrowthRate growthRate;
-    public int catchRate;
-    public int expYield;
-    public List<string> abilities = new();
-    public List<LearnsetEntry> learnset = new();
-    public List<Evolution> evolutions = new();
-
-    public string Id => id;
-    public string DisplayName => displayName;
-    public string Description => description;
-    public IReadOnlyList<PokemonType> Types => types;
-    public PokemonBaseStats BaseStats => baseStats;
-    public GrowthRate GrowthRate => growthRate;
-    public int CatchRate => catchRate;
-    public int ExpYield => expYield;
-    public IReadOnlyList<string> Abilities => abilities;
-    public IReadOnlyList<LearnsetEntry> Learnset => learnset;
-    public IReadOnlyList<Evolution> Evolutions => evolutions;
-}
-
-#endregion
-
-#region Database
-
-[CreateAssetMenu(fileName = "PokemonDatabase", menuName = "PKMN/Pokemon Database")]
-public class PokemonDatabase : ScriptableObject
-{
-public List<PokemonDefinition> pokemon = new();
-
-    public PokemonDefinition GetById(string id)
+    [System.Serializable]
+    public class LearnsetEntry
     {
-        return pokemon.Find(p => p != null && p.Id == id);
+        public int level;
+        public List<string> moves;
     }
 
-    public IReadOnlyList<PokemonDefinition> All => pokemon;
-}
+    [System.Serializable]
+    public class Evolution
+    {
+        public string trigger;
+        public int minLevel;
+        public string to;
+    }
 
-#endregion
+    #endregion
+
+    #region Definitions
+
+    [System.Serializable]
+    public class PokemonDefinition
+    {
+        public string id;
+        public string displayName;
+        [TextArea] public string description;
+        public PokemonType[] types;
+        public PokemonBaseStats baseStats;
+        public GrowthRate growthRate;
+        public int catchRate;
+        public int expYield;
+        public List<string> abilities = new();
+        public List<LearnsetEntry> learnset = new();
+        public List<Evolution> evolutions = new();
+
+        public string Id => id;
+        public string DisplayName => displayName;
+        public string Description => description;
+        public IReadOnlyList<PokemonType> Types => types;
+        public PokemonBaseStats BaseStats => baseStats;
+        public GrowthRate GrowthRate => growthRate;
+        public int CatchRate => catchRate;
+        public int ExpYield => expYield;
+        public IReadOnlyList<string> Abilities => abilities;
+        public IReadOnlyList<LearnsetEntry> Learnset => learnset;
+        public IReadOnlyList<Evolution> Evolutions => evolutions;
+    }
+
+    #endregion
+
+    #region Database
+
+    [CreateAssetMenu(fileName = "PokemonDatabase", menuName = "PKMN/Pokemon Database")]
+    public class PokemonDatabase : ScriptableObject
+    {
+        public List<PokemonDefinition> pokemon = new();
+
+        public PokemonDefinition GetById(string id)
+        {
+            return pokemon.Find(p => p != null && p.Id == id);
+        }
+
+        public IReadOnlyList<PokemonDefinition> All => pokemon;
+    }
+
+    #endregion
+}

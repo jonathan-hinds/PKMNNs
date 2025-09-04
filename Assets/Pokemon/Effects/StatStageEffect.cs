@@ -1,15 +1,18 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName="PKMN/Effects/Stat Stage")]
-public class StatStageEffect : BattleEffect
+namespace PKMN
 {
-    public Stat stat;
-    public int stages;
-    public bool targetSelf;
-
-    public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+    [CreateAssetMenu(menuName="PKMN/Effects/Stat Stage")]
+    public class StatStageEffect : BattleEffect
     {
-        var p = targetSelf ? user : target;
-        p?.SetStatStage(stat, stages);
+        public Stat stat;
+        public int stages;
+        public bool targetSelf;
+
+        public override void Apply(BattlePokemon user, BattlePokemon target, MoveDefinition move, BattleContext context)
+        {
+            var p = targetSelf ? user : target;
+            p?.SetStatStage(stat, stages);
+        }
     }
 }

@@ -1,10 +1,13 @@
-public enum Stat
+namespace PKMN
 {
-    Attack,
-    Defense,
-    SpecialAttack,
-    SpecialDefense,
-    Speed,
-    Accuracy,
-    Evasion
+    public enum Stat
+    {
+        Attack,
+        Defense,
+        SpecialAttack,
+        SpecialDefense,
+        Speed,
+        Accuracy,
+        Evasion
+    }
 }
