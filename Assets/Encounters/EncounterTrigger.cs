@@ -48,6 +48,7 @@ public class EncounterTrigger : MonoBehaviour, IGridBound
         table = FindObjectOfType<EncounterTable>();
         if (!grassTilemap || !grassTilemap.gameObject.scene.IsValid())
             grassTilemap = GameObject.Find(grassTilemapName)?.GetComponent<Tilemap>();
+
         currentGrid = mover ? mover.CurrentGrid : null;
     }
 
