@@ -88,7 +88,7 @@ public class BattlePokemon
     {
         if (statusDb == null)
             return;
-        foreach (var s in statuses)
+        foreach (var s in statuses.ToArray())
         {
             var def = statusDb.GetById(s.id);
             if (def == null || def.hooks == null)
