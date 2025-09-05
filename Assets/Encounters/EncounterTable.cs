@@ -43,7 +43,16 @@ public class EncounterTable : MonoBehaviour
                 int level = Random.Range(entry.minLevel, entry.maxLevel + 1);
                 var def = pokemonDatabase.GetById(entry.pokemonId);
                 string name = def != null ? def.DisplayName : "Unknown";
-                Debug.Log($"Encountered Pokémon: {name} (Lv {level})");
+                string statsText = "Unknown";
+                string movesText = "Unknown";
+                if (def != null)
+                {
+                    var instance = new PokemonInstance(def, level);
+                    var stats = instance.Stats;
+                    statsText = $"HP {stats.hp}, Atk {stats.attack}, Def {stats.defense}, SpA {stats.specialAttack}, SpD {stats.specialDefense}, Spe {stats.speed}";
+                    movesText = instance.Moves.Count > 0 ? string.Join(", ", instance.Moves) : "None";
+                }
+                Debug.Log($"Encountered Pokémon: {name} (Lv {level}) Stats: {statsText} Moves: {movesText}");
                 return true;
             }
         }
