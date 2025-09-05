@@ -9,6 +9,7 @@ public class PokemonInstance
 
     private readonly List<string> moveSet;
     private readonly List<string> learnableMoves;
+    private string heldItem;
 
     public PokemonDefinition Definition => definition;
     public int Level => level;
@@ -19,6 +20,7 @@ public class PokemonInstance
     public IReadOnlyList<string> LearnableMoves => learnableMoves;
     public IReadOnlyList<string> Abilities => definition.Abilities;
     public IReadOnlyList<PokemonType> Types => definition.Types;
+    public string HeldItem => heldItem;
 
     public PokemonInstance(PokemonDefinition definition, int level)
     {
@@ -27,6 +29,26 @@ public class PokemonInstance
 
         learnableMoves = GetMovesForLevel(this.level);
         moveSet = GenerateMoveLoadout(learnableMoves);
+    }
+
+    public PokemonInstance(PokemonDefinition definition, int level, IEnumerable<string> movesOverride)
+    {
+        this.definition = definition;
+        this.level = Mathf.Clamp(level, 1, 100);
+
+        learnableMoves = GetMovesForLevel(this.level);
+        if (movesOverride != null)
+        {
+            moveSet = movesOverride
+                .Where(m => !string.IsNullOrWhiteSpace(m))
+                .Distinct()
+                .Take(4)
+                .ToList();
+        }
+        else
+        {
+            moveSet = GenerateMoveLoadout(learnableMoves);
+        }
     }
 
     private List<string> GetMovesForLevel(int targetLevel)
@@ -62,5 +84,10 @@ public class PokemonInstance
         // Randomly select up to four distinct moves from the available list
         var shuffled = available.OrderBy(_ => Random.value).ToList();
         return shuffled.Take(count).ToList();
+    }
+
+    public void SetHeldItem(string itemId)
+    {
+        heldItem = string.IsNullOrWhiteSpace(itemId) ? null : itemId;
     }
 }
