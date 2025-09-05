@@ -39,7 +39,7 @@ public class EncounterTable : MonoBehaviour
             if (roll <= 0f)
             {
                 int level = Random.Range(entry.minLevel, entry.maxLevel + 1);
-                string name = entry.pokemon ? entry.pokemon.DisplayName : "Unknown";
+                string name = entry.pokemon != null ? entry.pokemon.DisplayName : "Unknown";
                 Debug.Log($"Encountered Pokémon: {name} (Lv {level})");
                 return true;
             }

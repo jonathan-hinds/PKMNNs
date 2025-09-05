@@ -45,7 +45,7 @@ public class EncounterTrigger : MonoBehaviour, IGridBound
 
     private void RebindSceneRefs()
     {
-        table = FindObjectOfType<EncounterTable>();
+        table = FindFirstObjectByType<EncounterTable>();
         if (!grassTilemap || !grassTilemap.gameObject.scene.IsValid())
             grassTilemap = GameObject.Find(grassTilemapName)?.GetComponent<Tilemap>();
 
