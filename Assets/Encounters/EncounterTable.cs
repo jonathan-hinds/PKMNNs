@@ -4,7 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class EncounterEntry
 {
-    public PokemonDefinition pokemon;
+    [PokemonId]
+    public string pokemonId;
     public int minLevel = 1;
     public int maxLevel = 1;
     public float weight = 1f;
@@ -14,6 +15,7 @@ public class EncounterTable : MonoBehaviour
 {
     [Range(0f, 1f)]
     public float encounterChance = 0.1f;
+    public PokemonDatabase pokemonDatabase;
     public List<EncounterEntry> encounters = new();
 
     /// <summary>
@@ -23,7 +25,7 @@ public class EncounterTable : MonoBehaviour
     /// <returns>True if an encounter occurred.</returns>
     public bool TryEncounter()
     {
-        if (encounters.Count == 0)
+        if (pokemonDatabase == null || encounters.Count == 0)
             return false;
         if (Random.value > encounterChance)
             return false;
@@ -39,7 +41,8 @@ public class EncounterTable : MonoBehaviour
             if (roll <= 0f)
             {
                 int level = Random.Range(entry.minLevel, entry.maxLevel + 1);
-                string name = entry.pokemon ? entry.pokemon.DisplayName : "Unknown";
+                var def = pokemonDatabase.GetById(entry.pokemonId);
+                string name = def != null ? def.DisplayName : "Unknown";
                 Debug.Log($"Encountered Pokémon: {name} (Lv {level})");
                 return true;
             }
