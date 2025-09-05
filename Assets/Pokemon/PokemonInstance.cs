@@ -57,8 +57,10 @@ public class PokemonInstance
         if (available == null || available.Count == 0)
             return new List<string>();
 
-        // Take the last four moves learned to mirror main-series behavior
         int count = Mathf.Min(4, available.Count);
-        return available.Skip(available.Count - count).Take(count).ToList();
+
+        // Randomly select up to four distinct moves from the available list
+        var shuffled = available.OrderBy(_ => Random.value).ToList();
+        return shuffled.Take(count).ToList();
     }
 }
