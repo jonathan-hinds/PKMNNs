@@ -11,6 +11,7 @@ public class EncounterTrigger : MonoBehaviour, IGridBound
 {
     [SerializeField] private GridMover2D mover;
     [SerializeField] private Tilemap grassTilemap;
+    [SerializeField] private string grassTilemapName = "GrassBehind";
 
     private EncounterTable table;
     private Grid currentGrid;
@@ -46,7 +47,8 @@ public class EncounterTrigger : MonoBehaviour, IGridBound
     {
         table = FindObjectOfType<EncounterTable>();
         if (!grassTilemap || !grassTilemap.gameObject.scene.IsValid())
-            grassTilemap = GameObject.Find("GrassBehind")?.GetComponent<Tilemap>();
+            grassTilemap = GameObject.Find(grassTilemapName)?.GetComponent<Tilemap>();
+
         currentGrid = mover ? mover.CurrentGrid : null;
     }
 
