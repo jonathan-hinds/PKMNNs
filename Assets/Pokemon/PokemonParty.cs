@@ -86,14 +86,15 @@ public class PokemonParty : MonoBehaviour
     {
         if (index < 0 || index >= members.Count)
             return;
-        members.RemoveAt(index);
         int previousSelection = SelectedIndex;
+        var previousSelectedPokemon = Selected;
+        members.RemoveAt(index);
         if (index < SelectedIndex)
             SelectedIndex--;
         else if (SelectedIndex >= members.Count)
             SelectedIndex = members.Count - 1;
         OnPartyUpdated?.Invoke();
-        if (previousSelection != SelectedIndex)
+        if (previousSelection != SelectedIndex || previousSelectedPokemon != Selected)
             OnSelectionChanged?.Invoke(SelectedIndex);
     }
 
