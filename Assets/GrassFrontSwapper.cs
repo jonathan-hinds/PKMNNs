@@ -7,6 +7,8 @@ public class GrassFrontSwapper : MonoBehaviour, IGridBound
     [Header("Scene refs (required)")]
     [SerializeField] private Tilemap grassBehind;    // ORDER 1: all bushes painted here at start
     [SerializeField] private Tilemap grassFront;     // ORDER 3: starts EMPTY
+    [SerializeField] private string behindTilemapName = "GrassBehind";
+    [SerializeField] private string frontTilemapName = "GrassFront";
     private Grid playerGrid;                         // The Grid your map/mover use (parent of tilemaps)
 
     [Header("Player (required)")]
@@ -75,10 +77,10 @@ public class GrassFrontSwapper : MonoBehaviour, IGridBound
             playerGrid = playerMover.CurrentGrid;
 
         if (!grassBehind || !grassBehind.gameObject.scene.IsValid())
-            grassBehind = GameObject.Find("GrassBehind")?.GetComponent<Tilemap>();
+            grassBehind = GameObject.Find(behindTilemapName)?.GetComponent<Tilemap>();
 
         if (!grassFront || !grassFront.gameObject.scene.IsValid())
-            grassFront = GameObject.Find("GrassFront")?.GetComponent<Tilemap>();
+            grassFront = GameObject.Find(frontTilemapName)?.GetComponent<Tilemap>();
 
         if (playerGrid && grassBehind && grassFront)
             HandleStepFinished(GetFeetCellInMoverGrid());
